@@ -1,0 +1,88 @@
+/* Tokens first so colors/type can be changed in one place. */
+:root{
+  --navy:#0B2545;      /* ground bands, headings */
+  --white:#FFFFFF;     /* page ground */
+  --blue:#1F4E8C;      /* links, buttons (7.9:1 on white) */
+  --pale:#E8EEF7;      /* surfaces */
+  --slate:#44546A;     /* muted text (7:1 on white) */
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  /* five clearly separated sizes */
+  --s1:.9rem; --s2:1.1rem; --s3:1.5rem; --s4:2.25rem; --s5:clamp(2.2rem,6vw,4rem);
+  --wrap:68rem;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--navy);font:400 var(--s2)/1.6 var(--body)}
+::selection{background:var(--blue);color:var(--white)}
+img{max-width:100%;height:auto}
+a{color:var(--blue);text-underline-offset:.2em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.15;margin:0 0 .6em}
+h1{font-size:var(--s5)} h2{font-size:var(--s4)} h3{font-size:var(--s3)}
+p{margin:0 0 1em;max-width:42rem}
+.small{font-size:var(--s1);color:var(--slate)}
+
+/* Header / nav: wraps on phones, 44px touch targets */
+.site-header{background:var(--navy);color:var(--white)}
+.site-header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 24px}
+.brand{font-family:var(--display);font-size:var(--s3);font-weight:600;color:var(--white);text-decoration:none;padding:10px 0;min-height:44px}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:0 8px;margin:0;padding:0}
+nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;color:var(--white);text-decoration:none;border-bottom:3px solid transparent}
+nav a:hover{border-bottom-color:var(--white)}
+nav a[aria-current="page"]{border-bottom-color:var(--white);font-weight:600}
+.site-header a:focus-visible{outline-color:var(--white)}
+
+/* Bands alternate navy / white */
+.band-navy{background:var(--navy);color:var(--white)}
+.band-navy a{color:var(--white)}
+.band-navy .small{color:#C9D6EA}
+.band{padding:56px 0}
+.band-pale{background:var(--pale)}
+
+/* Hero */
+.hero{display:grid;gap:32px;align-items:center;padding-top:48px;padding-bottom:48px}
+.hero h1{max-width:20ch}
+.lead{font-size:var(--s3);max-width:34rem}
+
+/* Photo placeholder (clearly marked) */
+.photo{aspect-ratio:4/5;width:100%;max-width:340px;background:var(--pale);color:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;border:2px dashed var(--blue)}
+.photo strong{font-family:var(--display);font-size:var(--s5);display:block}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;background:var(--white);color:var(--navy);font-weight:600;text-decoration:none;border:2px solid var(--white)}
+.btn:hover{background:transparent;color:var(--white)}
+.btn.solid{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.btn.solid:hover{background:var(--white);color:var(--navy)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Project card: real offset shadow, square corners */
+.card{background:var(--white);border:2px solid var(--navy);box-shadow:8px 8px 0 var(--navy);padding:24px;max-width:46rem}
+.card ul{padding-left:1.2em;margin:0}
+.card li{margin:.4em 0}
+.ph{color:var(--slate);font-style:italic}
+
+dl{margin:0} dt{font-weight:600;margin-top:1em} dd{margin:0}
+.contact-list{list-style:none;padding:0;margin:0}
+.contact-list li{padding:14px 0;border-bottom:1px solid var(--navy);display:flex;flex-wrap:wrap;gap:4px 16px}
+.contact-list b{min-width:7rem}
+
+.site-footer{background:var(--navy);color:#C9D6EA;padding:24px 0;font-size:var(--s1)}
+
+/* Motion: one quiet page-load moment, off for reduced-motion users */
+@media (prefers-reduced-motion:no-preference){
+  .hero>*{animation:rise .6s ease-out both}
+  .hero>*:nth-child(2){animation-delay:.1s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+}
+@media (min-width:768px){
+  .wrap{padding:0 32px}
+  .hero{grid-template-columns:1.5fr 1fr;padding-top:80px;padding-bottom:80px}
+  .band{padding:72px 0}
+}
+
+/* Buttons inside navy bands: navy text on white (overrides the band link color) */
+.band-navy .btn{color:var(--navy)}
+.band-navy .btn:hover{background:transparent;color:var(--white)}
